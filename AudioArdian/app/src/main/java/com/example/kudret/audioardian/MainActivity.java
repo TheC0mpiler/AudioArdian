@@ -47,12 +47,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 metaServerAdress = input.getText().toString();
                 metaServerPort = input1.getText().toString();
-                ClientConnection a = new ClientConnection(metaServerAdress,metaServerPort);
-                mListView = findViewById(R.id.listView);
-                Song [] allMusic = a.getAllMusics();
-                List<Song> songs = generateSongs(allMusic);
-                SongAdapter adapter = new SongAdapter(MainActivity.this, songs);
-                mListView.setAdapter(adapter);
+                //ClientConnection a = new ClientConnection(metaServerAdress,metaServerPort);
+                //mListView = findViewById(R.id.listView);
+                //Song [] allMusic = a.getAllMusics();
+                //List<Song> songs = generateSongs(allMusic);
+                //SongAdapter adapter = new SongAdapter(MainActivity.this, songs);
+                //mListView.setAdapter(adapter);
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
