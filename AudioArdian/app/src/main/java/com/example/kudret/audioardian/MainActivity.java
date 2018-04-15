@@ -6,7 +6,9 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -20,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     String metaServerPort;
 
     ListView mListView;
+
+    ClientConnection metaServer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +51,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 metaServerAdress = input.getText().toString();
                 metaServerPort = input1.getText().toString();
-                //ClientConnection a = new ClientConnection(metaServerAdress,metaServerPort);
-                //mListView = findViewById(R.id.listView);
-                //Song [] allMusic = a.getAllMusics();
-                //List<Song> songs = generateSongs(allMusic);
-                //SongAdapter adapter = new SongAdapter(MainActivity.this, songs);
-                //mListView.setAdapter(adapter);
+                metaServer = new ClientConnection(metaServerAdress,metaServerPort);
+                mListView = findViewById(R.id.listView);
+                Song [] allMusic = metaServer.getMusics("","","");
+                List<Song> songs = generateSongs(allMusic);
+                SongAdapter adapter = new SongAdapter(MainActivity.this, songs);
+                mListView.setAdapter(adapter);
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -63,7 +67,28 @@ public class MainActivity extends AppCompatActivity {
         });
 
         builder.show();
+
+
+        final ImageButton button = findViewById(R.id.search);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                EditText nameView = findViewById(R.id.name);
+                String name = nameView.getText().toString();
+
+                EditText authorView = findViewById(R.id.author);
+                String author = authorView.getText().toString();
+
+                EditText albumView = findViewById(R.id.album);
+                String album = albumView.getText().toString();
+
+                Song [] allMusic = metaServer.getMusics(name,author,album);
+                List<Song> songs = generateSongs(allMusic);
+                SongAdapter adapter = new SongAdapter(MainActivity.this, songs);
+                mListView.setAdapter(adapter);
+            }
+        });
     }
+
     private List<Song> generateSongs(Song[] songList){
         List<Song> songs = new ArrayList<Song>();
         for(int i = 0 ; i < songList.length ; i++){
