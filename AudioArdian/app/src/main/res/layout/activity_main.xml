@@ -18,7 +18,7 @@
             android:layout_toStartOf="@+id/ImageButton01"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name" />
+            android:text="Song" />
 
         <EditText
             android:id="@+id/editText2"
@@ -29,7 +29,7 @@
             android:layout_below="@+id/editText"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name" />
+            android:text="Author" />
 
         <EditText
             android:id="@+id/editText3"
@@ -40,7 +40,7 @@
             android:layout_below="@+id/editText2"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name" />
+            android:text="Album" />
 
         <ImageButton
             android:id="@+id/ImageButton01"
