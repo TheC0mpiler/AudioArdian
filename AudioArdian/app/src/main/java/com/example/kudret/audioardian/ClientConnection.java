@@ -21,7 +21,7 @@ public class ClientConnection {
         this.metaServerPort = metaServerPort;
         this.metaServerAdress = metaServerAdress;
     }
-    public Song[] getAllMusics(){
+    public Song[] getMusics(String name, String author, String album){
         try(com.zeroc.Ice.Communicator communicator = com.zeroc.Ice.Util.initialize())
         {
             com.zeroc.Ice.ObjectPrx base = communicator.stringToProxy("MetaServer:default -h "+metaServerAdress+" -p "+metaServerPort);
@@ -29,7 +29,7 @@ public class ClientConnection {
             if(metaServer == null) {
                 throw new Error("Invalid proxy");
             }
-            return metaServer.searchMusic("","","");
+            return metaServer.searchMusic(name,author,album);
         }
     }
 }
