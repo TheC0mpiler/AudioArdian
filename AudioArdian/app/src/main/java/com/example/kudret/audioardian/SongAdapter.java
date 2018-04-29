@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.kudret.audioardian.MetaServer.Song;
+import com.squareup.picasso.Picasso;
 import com.zeroc.IceInternal.Ex;
 
 import java.io.InputStream;
@@ -28,7 +29,6 @@ import static java.security.AccessController.getContext;
 
 public class SongAdapter extends ArrayAdapter<Song> {
 
-    //tweets est la liste des models à afficher
     public SongAdapter(Context context, List<Song> songs) {
         super(context, 0, songs);
     }
@@ -65,14 +65,8 @@ public class SongAdapter extends ArrayAdapter<Song> {
             duration +="0";
         duration += Integer.toString(reste);
         viewHolder.duration.setText(duration);
-        try{
-            URL url = new URL(music.cover);
-            InputStream content = (InputStream)url.getContent();
-            Drawable d = Drawable.createFromStream(content , "src");
-            viewHolder.cover.setImageDrawable(d);
-        }catch (Exception e){
+        Picasso.with(getContext()).load(music.cover).into(viewHolder.cover);
 
-        }
 
 
         return convertView;
